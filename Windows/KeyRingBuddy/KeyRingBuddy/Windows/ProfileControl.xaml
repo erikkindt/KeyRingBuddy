@@ -1,0 +1,116 @@
+﻿<UserControl x:Class="KeyRingBuddy.Windows.ProfileControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KeyRingBuddy.Windows"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="500">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" MinWidth="150" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" MinWidth="150" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        
+        <local:ItemListControl x:Name="itemListCategories"
+                               Caption="Categories"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="0,0,2,0"
+                               SelectedItemChanged="itemListCategories_SelectedItemChanged" />
+
+        <Border Grid.Row="0" 
+                Grid.Column="0"
+                Width="2" 
+                HorizontalAlignment="Right"
+                Background="{StaticResource LightBrush}" />
+
+        <GridSplitter Grid.Row="0" 
+                      Grid.Column="1"
+                      Width="4"
+                      Background="{StaticResource LightPlusBrush}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Stretch" />
+
+        <local:ItemListControl x:Name="itemListAccounts"
+                               Caption="Accounts"
+                               Grid.Row="0"
+                               Grid.Column="2"
+                               Margin="0,0,2,0"
+                               SelectedItemChanged="itemListAccounts_SelectedItemChanged" />
+
+        <Border Grid.Row="0" 
+                Grid.Column="2"
+                Width="2" 
+                HorizontalAlignment="Right"
+                Background="{StaticResource LightBrush}" />
+
+        <GridSplitter Grid.Row="0" 
+                      Grid.Column="3"
+                      Width="4"
+                      Background="{StaticResource LightPlusBrush}"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Stretch" />
+        
+        <Grid x:Name="gridAccount" 
+              Margin="0,4,4,4"
+              Grid.Column="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            
+            <Border Grid.Row="0"              
+                    CornerRadius="10,10,0,0"
+                    Background="{StaticResource HotBrush}">
+
+                <TextBlock x:Name="textBlockAccountCaption"                           
+                           Text="Account"
+                           FontSize="22"
+                           FontWeight="Medium"
+                           Foreground="{StaticResource LightPlusBrush}"
+                           Padding="5"
+                           Margin="4,6,0,6"
+                           />
+            </Border>
+            
+            <ScrollViewer Grid.Row="1"
+                          VerticalScrollBarVisibility="Auto">
+                
+                    <local:AccountContentView x:Name="accountContent"
+                                              Background="{StaticResource LightPlusBrush}"
+                                              Grid.Row="0" />
+                
+            </ScrollViewer>
+            
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        Background="{StaticResource LightBrush}">
+                <Button Style="{StaticResource ChromeActionButtonStyle}"
+                        Margin="5"
+                        Click="buttonAccountLaunch_Click">
+                        Launch
+                </Button>
+                <Button Style="{StaticResource ChromeButtonStyle}"
+                        Margin="5"
+                        Click="buttonAccountEdit_Click">
+                    Edit
+                </Button>
+                <Button Style="{StaticResource ChromeButtonStyle}"
+                        Margin="5"
+                        Click="buttonAccountDelete_Click">
+                    Delete
+                </Button>
+            </StackPanel>
+        
+        </Grid>
+        
+    </Grid>
+</UserControl>

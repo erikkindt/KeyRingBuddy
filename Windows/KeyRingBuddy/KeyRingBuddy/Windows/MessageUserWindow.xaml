@@ -1,0 +1,62 @@
+﻿<Window x:Class="KeyRingBuddy.Windows.MessageUserWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Height="198" 
+        Width="590" 
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize"
+        Style="{StaticResource ChromeWindowStyle}"
+        Background="{StaticResource CaptionBackgroundBrush}">
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Border x:Name="borderIcon" 
+                Grid.Row="0"
+                Grid.Column="0"
+                BorderThickness="2"
+                BorderBrush="Black"
+                CornerRadius="16"
+                Height="32"
+                Width="32"
+                Margin="15,10,5,5"
+                VerticalAlignment="Top">
+            <TextBlock x:Name="textBlockIcon" 
+                       Grid.Row="0"
+                       Grid.Column="0"
+                       VerticalAlignment="Center"
+                       HorizontalAlignment="Center"
+                       FontWeight="Bold"
+                       FontSize="28"
+                       FontFamily="Arial"
+                       Text="i"/>
+        </Border>
+
+        <ScrollViewer Grid.Row="0"
+                      Grid.Column="1"
+                      Margin="5,18,10,5"
+                      HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <TextBlock x:Name="textBlockMessage" 
+                       TextWrapping="Wrap"/>
+        </ScrollViewer>
+
+        <StackPanel x:Name="stackPanelButtons" 
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Right"
+                    Margin="15,5,10,10">
+        </StackPanel>
+
+    </Grid>
+</Window>

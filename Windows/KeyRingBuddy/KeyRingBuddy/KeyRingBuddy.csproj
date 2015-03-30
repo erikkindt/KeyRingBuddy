@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C421431F-47BE-46A3-B083-D690D1F27EF8}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>KeyRingBuddy</RootNamespace>
+    <AssemblyName>KeyRingBuddy</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationFramework.Aero" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Controller\Desktop\AccountEditController.cs" />
+    <Compile Include="Controller\Desktop\ProfileController.cs" />
+    <Compile Include="Controller\Desktop\ProfileEditController.cs" />
+    <Compile Include="Controller\Desktop\ProfileLoginController.cs" />
+    <Compile Include="Controller\Desktop\ProfileSelectController.cs" />
+    <Compile Include="Controller\Desktop\DesktopApplicationManager.cs" />
+    <Compile Include="Controller\Desktop\DesktopControllerBase.cs" />
+    <Compile Include="Controller\Desktop\IDesktopView.cs" />
+    <Compile Include="Framework\ApplicationEventNames.cs" />
+    <Compile Include="Framework\ApplicationManager.cs" />
+    <Compile Include="Framework\IController.cs" />
+    <Compile Include="Controller\Desktop\IDesktopController.cs" />
+    <Compile Include="Framework\IEventListener.cs" />
+    <Compile Include="Framework\CryptoContainer.cs" />
+    <Compile Include="Framework\PasswordGenerator.cs" />
+    <Compile Include="Model\AccountHeader.cs" />
+    <Compile Include="Model\AccountHeaderCollection.cs" />
+    <Compile Include="Windows\AccountContentView.xaml.cs">
+      <DependentUpon>AccountContentView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Item.cs" />
+    <Compile Include="Model\IProfile.cs" />
+    <Compile Include="Model\IProfileManager.cs" />
+    <Compile Include="Model\SerializableDetail.cs" />
+    <Compile Include="Model\ZipProfile.cs" />
+    <Compile Include="Framework\SecureStringUtility.cs" />
+    <Compile Include="Framework\Win32\Constant.cs" />
+    <Compile Include="Framework\Win32\MINMAXINFO.cs" />
+    <Compile Include="Framework\Win32\POINT.cs" />
+    <Compile Include="Framework\Win32\RECT.cs" />
+    <Compile Include="Model\ZipProfileManager.cs" />
+    <Compile Include="Windows\AccountEditControl.xaml.cs">
+      <DependentUpon>AccountEditControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ItemListControl.xaml.cs">
+      <DependentUpon>ItemListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\FunctionEventArgs.cs" />
+    <Compile Include="Windows\MessageUserWindow.xaml.cs">
+      <DependentUpon>MessageUserWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BreadCrumb.cs" />
+    <Compile Include="Windows\BreadCrumbControl.xaml.cs">
+      <DependentUpon>BreadCrumbControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\BreadCrumbEventArgs.cs" />
+    <Compile Include="Windows\CreateItemControl.xaml.cs">
+      <DependentUpon>CreateItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DefaultProfileImageControl.xaml.cs">
+      <DependentUpon>DefaultProfileImageControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\DesktopWindow.xaml.cs">
+      <DependentUpon>DesktopWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\LoginControl.xaml.cs">
+      <DependentUpon>LoginControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\NavigationBackButtonControl.xaml.cs">
+      <DependentUpon>NavigationBackButtonControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ProfileControl.xaml.cs">
+      <DependentUpon>ProfileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\ProfileEditControl.xaml.cs">
+      <DependentUpon>ProfileEditControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TileSelectControl.xaml.cs">
+      <DependentUpon>TileSelectControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Styles\WindowCaptionButton.xaml.cs">
+      <DependentUpon>WindowCaptionButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Styles\WindowCloseButton.cs" />
+    <Compile Include="Windows\Styles\WindowIconImage.xaml.cs">
+      <DependentUpon>WindowIconImage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\Styles\WindowMaximizeButton.cs" />
+    <Compile Include="Windows\Styles\WindowMinimizeButton.cs" />
+    <Compile Include="Windows\TileControl.xaml.cs">
+      <DependentUpon>TileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\TileControlEventArgs.cs" />
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Model\Account.cs" />
+    <Compile Include="Model\AccountDetail.cs" />
+    <Compile Include="Framework\ClipboardStackInjector.cs" />
+    <Compile Include="Framework\MessageOnlyWindow.cs" />
+    <Compile Include="Framework\Win32\User32.cs" />
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Windows\AccountContentView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\AccountEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ItemListControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\MessageUserWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\BreadCrumbControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\CreateItemControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DefaultProfileImageControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\DesktopWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\LoginControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\NavigationBackButtonControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProfileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\ProfileEditControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\ChromeActionButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\ChromeButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\ChromeListButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\ChromePasswordBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\ChromeTextBoxStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TileSelectControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\ChromeComboBoxStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Styles\ChromeLinkButtonStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Styles\ChromeScrollViewerStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Styles\ChromeToolbarStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Styles\ChromeWindowStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Styles\ThemeColorStyle.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Windows\Styles\WindowCaptionButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\Styles\WindowIconImage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\TileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="AppIcon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

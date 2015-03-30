@@ -1,0 +1,81 @@
+﻿<Window x:Class="KeyRingBuddy.Windows.DesktopWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:KeyRingBuddy.Windows"
+        Title="Key Ring Buddy" 
+        WindowStartupLocation="CenterScreen"
+        Icon="..\AppIcon.ico"
+        Height="670" 
+        Width="875"
+        MinWidth="300"
+        MinHeight="200"
+        ResizeMode="CanResizeWithGrip"
+        Style="{StaticResource ChromeWindowStyle}"
+        Background="{StaticResource CaptionBackgroundBrush}">
+    
+    <Window.Resources>
+        <Storyboard x:Key="storyboardTransition">
+            <DoubleAnimation Duration="0:0:0.5"
+							 Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+							 DecelerationRatio="0.8"
+                             AccelerationRatio="0.2"/>
+            <DoubleAnimation Duration="0:0:0.5"
+							 Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)"
+							 DecelerationRatio="0.8"
+                             AccelerationRatio="0.2"/>
+        </Storyboard>
+    </Window.Resources>
+
+    <Grid>
+        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" MinHeight="75" />
+            <RowDefinition Height="150" />
+        </Grid.RowDefinitions>
+
+        <Border Grid.Row="0"
+                Background="{StaticResource DarkBrush}"
+                Padding="4,8,4,4">
+            <local:BreadCrumbControl x:Name="breadCrumbView"
+                                     BreadCrumbClick="breadCrumbView_BreadCrumbClick"/>
+        </Border>
+
+        <!-- Content -->
+        <Border x:Name="borderContent"
+                Grid.Row="1"
+                Background="{StaticResource LightPlusBrush}"/>
+        
+        <!-- Transitions -->
+        <Border x:Name="borderTransition" 
+                Grid.Row="1"
+                ClipToBounds="True"
+                Visibility="Hidden">
+            <Grid x:Name="gridTransition">
+                <Rectangle x:Name="currentRectangle">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform />
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+                <Rectangle x:Name="nextRectangle">
+                    <Rectangle.RenderTransform>
+                        <TranslateTransform />
+                    </Rectangle.RenderTransform>
+                </Rectangle>
+            </Grid>
+        </Border>
+
+        <Border Grid.Row="2"
+                Background="{StaticResource DarkBrush}">
+            
+            <StackPanel x:Name="stackPanelFunctions"
+                        Orientation="Horizontal"
+                        Margin="5"
+                        Button.Click="stackPanelFunctions_Click">
+                
+            </StackPanel>
+            
+        </Border>
+
+    </Grid>
+</Window>

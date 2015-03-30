@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="KeyRingBuddy.Windows.DefaultProfileImageControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="64" d:DesignWidth="64">
+    <Canvas>
+        <Ellipse Canvas.Top="5"
+                 Canvas.Left="20"
+                 Width="24"
+                 Height="24"
+                 Fill="{StaticResource HotBrush}" />
+        
+        <Path Fill="{StaticResource HotBrush}"
+              Data="M 12,30 L 12,56 52,56 52,30 40,30 32,38 24,30" />
+    </Canvas>
+</UserControl>

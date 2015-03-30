@@ -1,0 +1,34 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Color x:Key="CaptionBorderColor">#007ACC</Color>
+    <SolidColorBrush x:Key="CaptionBorderBrush" Color="{DynamicResource CaptionBorderColor}" />
+
+    <Color x:Key="CaptionForegroundColor">White</Color>
+    <SolidColorBrush x:Key="CaptionForegroundBrush" Color="{DynamicResource CaptionForegroundColor}" />
+    
+    <Color x:Key="CaptionBackgroundColor">#6A6C6C</Color>
+    <SolidColorBrush x:Key="CaptionBackgroundBrush" Color="{DynamicResource CaptionBackgroundColor}" />   
+
+    <Color x:Key="DarkColor">#6A6C6C</Color>
+    <SolidColorBrush x:Key="DarkBrush" Color="{DynamicResource DarkColor}" />
+    
+    <Color x:Key="DarkPlusColor">#202021</Color>
+    <SolidColorBrush x:Key="DarkPlusBrush" Color="{DynamicResource DarkPlusColor}" />
+
+    <Color x:Key="LightColor">#EDEDED</Color>
+    <SolidColorBrush x:Key="LightBrush" Color="{DynamicResource LightColor}" />
+
+    <Color x:Key="LightPlusColor">White</Color>
+    <SolidColorBrush x:Key="LightPlusBrush" Color="{DynamicResource LightPlusColor}" />
+
+    <Color x:Key="HotColor">#007ACC</Color>
+    <SolidColorBrush x:Key="HotBrush" Color="{DynamicResource HotColor}" />
+
+    <Color x:Key="HotPlusColor">#61B145</Color>
+    <SolidColorBrush x:Key="HotPlusBrush" Color="{DynamicResource HotPlusColor}" />
+
+    <Color x:Key="HotPlusAltColor">#79DB55</Color>
+    <SolidColorBrush x:Key="HotPlusAltBrush" Color="{DynamicResource HotPlusAltColor}" />
+
+</ResourceDictionary>
