@@ -72,17 +72,23 @@
                     Background="{StaticResource HotBrush}">
 
                 <StackPanel Orientation="Horizontal"
-                            Margin="4,6,0,6">
+                            Margin="10,6,0,6">
                     <Image x:Name="imageAccountCaption"
                            Width="32"
-                           Height="32"/>
-                    
+                           Height="32">
+                        <Image.Effect>
+                            <DropShadowEffect BlurRadius="3" 
+                                              ShadowDepth="3"
+                                              Opacity="0.5"/>
+                        </Image.Effect>
+                    </Image>
+
                     <TextBlock x:Name="textBlockAccountCaption"                           
                                Text="Account"
                                FontSize="22"
                                FontWeight="Medium"
                                Foreground="{StaticResource LightPlusBrush}"
-                               Padding="5"/>
+                               Padding="10,5,5,5"/>
                 </StackPanel>
             </Border>
             

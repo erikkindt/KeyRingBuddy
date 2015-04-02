@@ -106,7 +106,9 @@ namespace KeyRingBuddy.Windows
             }
 
             ToggleButton button = new ToggleButton();
-            button.Style = FindResource("ChromeListButtonStyle") as Style;            
+            button.Style = FindResource("ChromeListButtonStyle") as Style;
+            button.HorizontalContentAlignment = HorizontalAlignment.Stretch;
+            button.HorizontalAlignment = HorizontalAlignment.Stretch;
             button.Tag = item;
 
             if (item.Icon == null)
@@ -116,17 +118,20 @@ namespace KeyRingBuddy.Windows
             else
             {
                 StackPanel sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;                
+                sp.Orientation = Orientation.Horizontal;
+                sp.HorizontalAlignment = HorizontalAlignment.Stretch;
 
                 Image img = new Image();
                 img.Height = 16;
                 img.Width = 16;
+                img.VerticalAlignment = VerticalAlignment.Center;
                 img.Source =  item.Icon;
                 sp.Children.Add(img);
 
                 TextBlock tb = new TextBlock();
                 tb.Text = item.Name;
                 tb.Margin = new Thickness(10, 0, 10, 0);
+                tb.VerticalAlignment = VerticalAlignment.Center;
                 sp.Children.Add(tb);
 
                 button.Content = sp;
