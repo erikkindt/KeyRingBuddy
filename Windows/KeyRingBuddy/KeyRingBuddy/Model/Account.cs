@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyRingBuddy.Framework;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
@@ -27,6 +28,7 @@ namespace KeyRingBuddy.Model
             Name = null;
             Category = null;
             Site = null;
+            Icon = new FavIcon();
             Details = new List<AccountDetail>();
         }
 
@@ -43,6 +45,7 @@ namespace KeyRingBuddy.Model
             Name = name;
             Category = category;
             Site = site;
+            Icon = new FavIcon();
             Details = new List<AccountDetail>();
         }
 
@@ -69,6 +72,11 @@ namespace KeyRingBuddy.Model
         /// The site for this account which may be a website or an application file.
         /// </summary>
         public string Site { get; set; }
+
+        /// <summary>
+        /// The account icon.
+        /// </summary>
+        public FavIcon Icon { get; set; }
 
         /// <summary>
         /// The details for this account.
@@ -169,6 +177,10 @@ namespace KeyRingBuddy.Model
                 reader.Read();
             }
 
+            Icon = new FavIcon();
+            if (reader.LocalName == "icon" && !reader.IsEmptyElement)
+                Icon.ReadXml(reader);
+
             reader.Read();
         }
 
@@ -193,6 +205,11 @@ namespace KeyRingBuddy.Model
                 detail.WriteXml(writer);
                 writer.WriteEndElement();
             }
+            writer.WriteEndElement();
+
+            writer.WriteStartElement("icon");
+            if (Icon != null)
+                Icon.WriteXml(writer);
             writer.WriteEndElement();
         }
 

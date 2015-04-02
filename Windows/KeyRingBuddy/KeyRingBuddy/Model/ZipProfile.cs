@@ -479,7 +479,7 @@ namespace KeyRingBuddy.Model
             WriteEntry<Account>(account.Id, account);
 
             AccountHeaderCollection headers = ReadEntry<AccountHeaderCollection>("headers") ?? new AccountHeaderCollection();
-            headers.Add(new AccountHeader(account.Category, account.Name, account.Id));
+            headers.Add(new AccountHeader(account.Category, account.Name, account.Icon, account.Id));
             WriteEntry<AccountHeaderCollection>("headers", headers);
         }
 
@@ -507,6 +507,7 @@ namespace KeyRingBuddy.Model
                 {
                     header.Category = account.Category;
                     header.AccountName = account.Name;
+                    header.AccountIcon = account.Icon;
                 }
             }
             WriteEntry<AccountHeaderCollection>("headers", headers);

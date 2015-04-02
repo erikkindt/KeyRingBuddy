@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KeyRingBuddy.Framework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace KeyRingBuddy.Model
         {
             Category = null;
             AccountName = null;
+            AccountIcon = new FavIcon();
             AccountId = Guid.Empty;
         }
 
@@ -30,11 +32,13 @@ namespace KeyRingBuddy.Model
         /// </summary>
         /// <param name="category">Category.</param>
         /// <param name="accountName">AccountName.</param>
+        /// <param name="accountIcon">AccountIcon.</param>
         /// <param name="accountId">AccountId.</param>
-        public AccountHeader(string category, string accountName, Guid accountId)
+        public AccountHeader(string category, string accountName, FavIcon accountIcon, Guid accountId)
         {
             Category = category;
             AccountName = accountName;
+            AccountIcon = accountIcon ?? new FavIcon();
             AccountId = accountId;
         }
 
@@ -51,6 +55,11 @@ namespace KeyRingBuddy.Model
         /// The name of the account.
         /// </summary>
         public string AccountName { get; set; }
+
+        /// <summary>
+        /// The account icon.
+        /// </summary>
+        public FavIcon AccountIcon { get; set; }
 
         /// <summary>
         /// The account id.
@@ -153,6 +162,15 @@ namespace KeyRingBuddy.Model
             AccountName = reader["accountName"];
             AccountId = Guid.Parse(reader["accountId"]);
 
+            if (!reader.IsEmptyElement)
+            {
+                if (reader.ReadToDescendant("accountIcon"))
+                {
+                    AccountIcon = new FavIcon();
+                    AccountIcon.ReadXml(reader);
+                }
+            }
+
             reader.Read();
         }
 
@@ -168,6 +186,11 @@ namespace KeyRingBuddy.Model
             writer.WriteAttributeString("category", Category);
             writer.WriteAttributeString("accountName", AccountName);
             writer.WriteAttributeString("accountId", AccountId.ToString());
+
+            writer.WriteStartElement("accountIcon");
+            if (AccountIcon != null)
+                AccountIcon.WriteXml(writer);
+            writer.WriteEndElement();
         }
 
         #endregion

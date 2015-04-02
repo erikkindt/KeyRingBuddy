@@ -143,6 +143,7 @@ namespace KeyRingBuddy.Controller.Desktop
                 _content = new AccountEditControl();
                 _content.SaveClick += AccountEditControl_SaveClick;
                 _content.CancelClick += AccountEditControl_CancelClick;
+                _content.RefreshIconClick += AccountEditControl_RefreshIconClick;
             }
 
             _content.ClearInput();
@@ -153,6 +154,8 @@ namespace KeyRingBuddy.Controller.Desktop
                 _content.Caption = "Create a new Account";
                 _content.AddDetail(new AccountDetail("Username", null));
                 _content.AddDetail(new AccountDetail("Password", null));
+                _content.AccountIcon = FavIcon.SmallDefaultIcon;
+                _content.AccountIconTag = new FavIcon();
             }
             else
             {
@@ -160,6 +163,7 @@ namespace KeyRingBuddy.Controller.Desktop
                 _content.AccountName = _account.Name;
                 _content.AccountCategory = _account.Category;
                 _content.AccountSite = _account.Site;
+                _content.AccountIcon = _account.Icon.SmallIconOrDefault;
 
                 foreach (AccountDetail detail in _account.Details)
                     _content.AddDetail(detail);
@@ -208,6 +212,8 @@ namespace KeyRingBuddy.Controller.Desktop
                     foreach (AccountDetail detail in _content.GetDetails())
                         _account.Details.Add(detail);
 
+                    _account.Icon = _content.AccountIconTag as FavIcon;
+
                     _profile.AddAccount(_account);
                     _saved = true;
 
@@ -222,6 +228,8 @@ namespace KeyRingBuddy.Controller.Desktop
                     _account.Details.Clear();
                     foreach (AccountDetail detail in _content.GetDetails())
                         _account.Details.Add(detail);
+
+                    _account.Icon = _content.AccountIconTag as FavIcon;
 
                     _profile.UpdateAccount(_account);
                     _saved = true;
@@ -239,6 +247,29 @@ namespace KeyRingBuddy.Controller.Desktop
         private void AccountEditControl_CancelClick(object sender, EventArgs e)
         {
             App.DesktopManager.Back();
+        }
+
+        /// <summary>
+        /// Download a new icon for the account.
+        /// </summary>
+        /// <param name="sender">Object that raised the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void AccountEditControl_RefreshIconClick(object sender, EventArgs e)
+        {
+            if (!String.IsNullOrWhiteSpace(_content.AccountSite))
+            {
+                try
+                {
+                    System.Windows.Input.Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                    FavIcon icon = FavIcon.Download(_content.AccountSite);
+                    _content.AccountIcon = icon.SmallIconOrDefault;
+                    _content.AccountIconTag = icon;
+                }
+                finally
+                {
+                    System.Windows.Input.Mouse.OverrideCursor = null;
+                }
+            }
         }
 
         #endregion

@@ -222,19 +222,20 @@ namespace KeyRingBuddy.Controller.Desktop
 
                 // setup categories
                 foreach (string categoryName in AccountHeader.GetSortedUniqueCategoryNames(_profile, true))
-                    _contentProfile.AddCategory(new Item(categoryName, categoryName));
+                    _contentProfile.AddCategory(new Item(categoryName, null, categoryName));
 
                 if (_category != null)
-                    _contentProfile.SelectedCategory = new Item(_category, _category);
+                    _contentProfile.SelectedCategory = new Item(_category, null, _category);
                 else
-                    _contentProfile.SelectedCategory = new Item("All", "All");
+                    _contentProfile.SelectedCategory = new Item("All", null, "All");
 
                 // select account
                 if (_account != null)
                 {
                     _contentProfile.SelectedAccount = new Item(
                         _account.Name,
-                        new AccountHeader(_account.Category, _account.Name, _account.Id));
+                        null,
+                        new AccountHeader(_account.Category, _account.Name, _account.Icon, _account.Id));
                 }
 
                 return _contentProfile;
@@ -277,7 +278,7 @@ namespace KeyRingBuddy.Controller.Desktop
                 }
 
                 foreach (AccountHeader header in headers.OrderBy(h => h.AccountName))
-                    _contentProfile.AddAccount(new Item(header.AccountName, header));
+                    _contentProfile.AddAccount(new Item(header.AccountName, header.AccountIcon.SmallIconOrDefault, header));
 
                 _category = categoryName;
             }
@@ -301,6 +302,7 @@ namespace KeyRingBuddy.Controller.Desktop
                 _account = _profile.GetAccount(header.AccountId);
 
                 _contentProfile.AccountName = _account.Name;
+                _contentProfile.AccountIcon = _account.Icon.LargeIconOrDefault;
                 _contentProfile.AccountCategory = _account.Category;
                 _contentProfile.AccountSite = _account.Site;
                 _contentProfile.AccountDetails = _account.Details;
@@ -392,7 +394,7 @@ namespace KeyRingBuddy.Controller.Desktop
 
                         if (!foundHeader)
                         {
-                            _contentProfile.RemoveCategory(new Item(header.Category, header.Category));
+                            _contentProfile.RemoveCategory(new Item(header.Category, null, header.Category));
                         }
                     }
                 }

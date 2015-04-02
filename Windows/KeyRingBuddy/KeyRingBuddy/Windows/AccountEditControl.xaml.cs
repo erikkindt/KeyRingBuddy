@@ -21,6 +21,15 @@ namespace KeyRingBuddy.Windows
     /// </summary>
     public partial class AccountEditControl : UserControl
     {
+        #region Fields
+
+        /// <summary>
+        /// Keeps track of the last account site value.
+        /// </summary>
+        private string _lastAccountSite;
+
+        #endregion
+
         #region Constructors
 
         /// <summary>
@@ -68,8 +77,26 @@ namespace KeyRingBuddy.Windows
         public string AccountSite
         {
             get { return textBoxSite.Text; }
-            set { textBoxSite.Text = value; }
+            set 
+            { 
+                textBoxSite.Text = value;
+                _lastAccountSite = value;
+            }
         }
+
+        /// <summary>
+        /// The account site icon.
+        /// </summary>
+        public ImageSource AccountIcon
+        {
+            get { return imageSiteIcon.Source; }
+            set { imageSiteIcon.Source = value; }
+        }
+
+        /// <summary>
+        /// Used to store an object associated with the account site icon.
+        /// </summary>
+        public object AccountIconTag { get; set; }
 
         /// <summary>
         /// Flag that is set to true whenever an input is modified.
@@ -329,6 +356,16 @@ namespace KeyRingBuddy.Windows
                 CancelClick(this, e);
         }
 
+        /// <summary>
+        /// Raises the RefreshIconClick event.
+        /// </summary>
+        /// <param name="e">Arguments to pass with the event.</param>
+        protected virtual void OnRefreshIconClick(EventArgs e)
+        {
+            if (RefreshIconClick != null)
+                RefreshIconClick(this, e);
+        }
+
         #endregion
 
         #region Event Handlers
@@ -351,6 +388,17 @@ namespace KeyRingBuddy.Windows
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
             OnCancelClick(EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Raises the RefreshIconClick event.
+        /// </summary>
+        /// <param name="sender">Object that raised the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void buttonRefreshIcon_Click(object sender, RoutedEventArgs e)
+        {
+            OnRefreshIconClick(EventArgs.Empty);
+            IsModified = true;
         }
 
         /// <summary>
@@ -409,6 +457,20 @@ namespace KeyRingBuddy.Windows
         }
 
         /// <summary>
+        /// Refresh the icon if the site value was changed.
+        /// </summary>
+        /// <param name="sender">Object that raised the event.</param>
+        /// <param name="e">Event arguments.</param>
+        private void textBoxSite_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (String.Compare(_lastAccountSite, AccountSite, true) != 0)
+            {
+                OnRefreshIconClick(EventArgs.Empty);
+                _lastAccountSite = AccountSite;
+            }
+        }
+
+        /// <summary>
         /// Move focus to the next input when enter is keyed.
         /// </summary>
         /// <param name="sender">Object that raised the event.</param>
@@ -459,6 +521,11 @@ namespace KeyRingBuddy.Windows
         /// Raised when the user clicks the cancel button.
         /// </summary>
         public event EventHandler CancelClick;
+
+        /// <summary>
+        /// Raised when the user refreshes the icon.
+        /// </summary>
+        public event EventHandler RefreshIconClick;
 
         #endregion
     }

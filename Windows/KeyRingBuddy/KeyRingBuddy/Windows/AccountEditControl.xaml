@@ -19,6 +19,7 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -115,7 +116,8 @@
                      Margin="5"
                      MaxLength="50"
                      VerticalContentAlignment="Center"
-                     TextChanged="textBoxSite_TextChanged"/>
+                     TextChanged="textBoxSite_TextChanged"
+                     LostFocus="textBoxSite_LostFocus"/>
 
             <TextBlock x:Name="textBlockSiteError"
                        Text="! Example error"
@@ -125,10 +127,40 @@
                        Foreground="Firebrick"
                        FontWeight="Medium"
                        VerticalAlignment="Center"/>
-        
+            
+            <!-- Site Icon -->
+            <TextBlock Grid.Row="4" 
+                       Grid.Column="0" 
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Center"
+                       FontSize="16"
+                       FontWeight="Medium"
+                       Foreground="{StaticResource DarkBrush}"
+                       Margin="10,5,5,5"
+                       Text="Icon:" />
+            
+            <StackPanel Grid.Row="4"
+                        Grid.Column="1"
+                        Margin="5"
+                        VerticalAlignment="Center"
+                        Orientation="Horizontal">
+                <Border BorderThickness="1"
+                        VerticalAlignment="Center"
+                        BorderBrush="{StaticResource LightBrush}">
+                    <Image x:Name="imageSiteIcon"
+                           Width="16"
+                           Height="16" />
+                </Border>
+                <Button Margin="5"
+                        VerticalAlignment="Center"
+                        Click="buttonRefreshIcon_Click">
+                    Refresh
+                </Button>
+            </StackPanel>
+            
             <!-- Details -->
             <TextBlock x:Name="textBlockDetails" 
-                       Grid.Row="4" 
+                       Grid.Row="5" 
                        Grid.Column="1" 
                        VerticalAlignment="Center"
                        FontSize="16"
@@ -140,7 +172,7 @@
 
             <!-- Add Detail -->
             <Button x:Name="buttonAddDetail"
-                    Grid.Row="5"
+                    Grid.Row="6"
                     Grid.Column="1"
                     HorizontalAlignment="Left"
                     Margin="5"
@@ -149,7 +181,7 @@
             </Button>            
             
             <StackPanel x:Name="panelButtons" 
-                        Grid.Row="6"
+                        Grid.Row="7"
                         Grid.Column="1"
                         Margin="0,10,0,0"
                         Orientation="Horizontal">

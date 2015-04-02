@@ -22,14 +22,8 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Padding="5">
 
-                        <TextBlock x:Name="text"  
-                                   Padding="10,0,10,0"
-                                   Foreground="{TemplateBinding Foreground}"
-                                   FontWeight="{TemplateBinding FontWeight}"
-                                   FontSize="{TemplateBinding FontSize}"
-                                   Text="{TemplateBinding Content}">
+                        <ContentPresenter />
 
-                        </TextBlock>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

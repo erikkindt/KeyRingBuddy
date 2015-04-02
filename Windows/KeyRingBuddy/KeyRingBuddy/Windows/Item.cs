@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
 
 namespace KeyRingBuddy.Windows
 {
@@ -17,10 +18,12 @@ namespace KeyRingBuddy.Windows
         /// Constructor.
         /// </summary>
         /// <param name="name">Name.</param>
+        /// <param name="icon">Icon.</param>
         /// <param name="tag">Tag.</param>
-        public Item(string name, object tag)
+        public Item(string name, ImageSource icon, object tag)
         {
             Name = name;
+            Icon = icon;
             Tag = tag;
         }
 
@@ -29,7 +32,7 @@ namespace KeyRingBuddy.Windows
         /// </summary>
         /// <param name="name">Name.</param>
         public Item(string name)
-            : this(name, null)
+            : this(name, null, null)
         {
         }
 
@@ -41,6 +44,11 @@ namespace KeyRingBuddy.Windows
         /// The item name.
         /// </summary>
         public string Name { get; private set; }
+
+        /// <summary>
+        /// The item icon.
+        /// </summary>
+        public ImageSource Icon { get; private set; }
 
         /// <summary>
         /// An object associated with the item.

@@ -106,9 +106,31 @@ namespace KeyRingBuddy.Windows
             }
 
             ToggleButton button = new ToggleButton();
-            button.Style = FindResource("ChromeListButtonStyle") as Style;
-            button.Content = item.Name;
+            button.Style = FindResource("ChromeListButtonStyle") as Style;            
             button.Tag = item;
+
+            if (item.Icon == null)
+            {
+                button.Content = item.Name;
+            }
+            else
+            {
+                StackPanel sp = new StackPanel();
+                sp.Orientation = Orientation.Horizontal;                
+
+                Image img = new Image();
+                img.Height = 16;
+                img.Width = 16;
+                img.Source =  item.Icon;
+                sp.Children.Add(img);
+
+                TextBlock tb = new TextBlock();
+                tb.Text = item.Name;
+                tb.Margin = new Thickness(10, 0, 10, 0);
+                sp.Children.Add(tb);
+
+                button.Content = sp;
+            }
 
             if (index == stackPanel.Children.Count)
                 stackPanel.Children.Add(button);

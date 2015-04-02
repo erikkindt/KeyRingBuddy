@@ -20,7 +20,7 @@ namespace KeyRingBuddyTests
         [TestMethod]
         public void AccountHeader_ToStringTest()
         {
-            AccountHeader ah = new AccountHeader("TestCategory", "TestAccount", Guid.NewGuid());
+            AccountHeader ah = new AccountHeader("TestCategory", "TestAccount", null, Guid.NewGuid());
             Assert.AreEqual<string>("TestAccount", ah.ToString());
         }
 
@@ -30,8 +30,8 @@ namespace KeyRingBuddyTests
         [TestMethod]
         public void AccountHeader_EqualsTest()
         {
-            AccountHeader ah1 = new AccountHeader("TestCategory1", "TestAccount1", Guid.NewGuid());
-            AccountHeader ah2 = new AccountHeader("TestCategory2", "TestAccount2", ah1.AccountId);
+            AccountHeader ah1 = new AccountHeader("TestCategory1", "TestAccount1", null, Guid.NewGuid());
+            AccountHeader ah2 = new AccountHeader("TestCategory2", "TestAccount2", null, ah1.AccountId);
 
             Assert.AreEqual<AccountHeader>(ah1, ah2);
             Assert.AreNotEqual<AccountHeader>(null, ah1);

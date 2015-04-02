@@ -68,6 +68,15 @@ namespace KeyRingBuddy.Windows
         }
 
         /// <summary>
+        /// The account icon.
+        /// </summary>
+        public ImageSource AccountIcon
+        {
+            get { return imageAccountCaption.Source; }
+            set { imageAccountCaption.Source = value; }
+        }
+
+        /// <summary>
         /// The account category.
         /// </summary>
         public string AccountCategory

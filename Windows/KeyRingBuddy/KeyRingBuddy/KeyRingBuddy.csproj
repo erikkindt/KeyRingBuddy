@@ -71,11 +71,13 @@
     <Compile Include="Controller\Desktop\IDesktopView.cs" />
     <Compile Include="Framework\ApplicationEventNames.cs" />
     <Compile Include="Framework\ApplicationManager.cs" />
+    <Compile Include="Framework\FavIcon.cs" />
     <Compile Include="Framework\IController.cs" />
     <Compile Include="Controller\Desktop\IDesktopController.cs" />
     <Compile Include="Framework\IEventListener.cs" />
     <Compile Include="Framework\CryptoContainer.cs" />
     <Compile Include="Framework\PasswordGenerator.cs" />
+    <Compile Include="Framework\VisualHelper.cs" />
     <Compile Include="Model\AccountHeader.cs" />
     <Compile Include="Model\AccountHeaderCollection.cs" />
     <Compile Include="Windows\AccountContentView.xaml.cs">
@@ -300,8 +302,10 @@
   <ItemGroup>
     <Resource Include="AppIcon.ico" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="Resources\" />
+    <Resource Include="Resources\SiteLarge.png" />
+    <Resource Include="Resources\SiteSmall.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
