@@ -110,7 +110,7 @@ namespace KeyRingBuddy.Controller.Desktop
                 case 0:
                     return new String[] 
                     {
-                        GENERATE_PASSWORD
+                        //GENERATE_PASSWORD
                     };
 
                 default:
