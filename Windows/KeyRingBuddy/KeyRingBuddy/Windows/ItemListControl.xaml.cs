@@ -117,24 +117,24 @@ namespace KeyRingBuddy.Windows
             }
             else
             {
-                StackPanel sp = new StackPanel();
-                sp.Orientation = Orientation.Horizontal;
-                sp.HorizontalAlignment = HorizontalAlignment.Stretch;
+                DockPanel dp = new DockPanel();
+                dp.LastChildFill = true;
 
                 Image img = new Image();
                 img.Height = 16;
                 img.Width = 16;
                 img.VerticalAlignment = VerticalAlignment.Center;
                 img.Source =  item.Icon;
-                sp.Children.Add(img);
+                DockPanel.SetDock(img, Dock.Left);
+                dp.Children.Add(img);
 
                 TextBlock tb = new TextBlock();
                 tb.Text = item.Name;
                 tb.Margin = new Thickness(10, 0, 10, 0);
                 tb.VerticalAlignment = VerticalAlignment.Center;
-                sp.Children.Add(tb);
+                dp.Children.Add(tb);
 
-                button.Content = sp;
+                button.Content = dp;
             }
 
             if (index == stackPanel.Children.Count)

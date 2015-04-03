@@ -15,7 +15,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" MinWidth="150" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
 
         <!-- Category -->
@@ -25,17 +24,16 @@
                    FontSize="16"
                    FontWeight="Medium"
                    Foreground="{StaticResource DarkBrush}"
-                   Margin="10,5,5,5"
+                   Margin="10,10,5,5"
                    Text="Category:"/>
 
         <TextBlock x:Name="textBlockCategory"
                    Grid.Row="0"
                    Grid.Column="1"
-                   Grid.ColumnSpan="2"
                    FontSize="16"
                    FontWeight="Medium"
                    Foreground="{StaticResource DarkPlusBrush}"
-                   Margin="5"
+                   Margin="5,10,5,5"
                    Text=""/>
 
         <TextBlock Grid.Row="1"
@@ -50,7 +48,6 @@
         <TextBlock x:Name="textBlockSite"
                    Grid.Row="1"
                    Grid.Column="1"
-                   Grid.ColumnSpan="2"
                    FontSize="16"
                    FontWeight="Medium"
                    Foreground="{StaticResource DarkPlusBrush}"
@@ -60,19 +57,6 @@
         <Border Grid.Row="2" 
                 Grid.Column="0"
                 Background="{StaticResource LightBrush}" 
-                Margin="0,10,0,5">            
-        </Border>
-
-        <Border Grid.Row="2" 
-                Grid.Column="1"
-                Background="{StaticResource LightBrush}" 
-                Margin="0,10,0,5">
-        </Border>
-
-        <Border Grid.Row="2"
-                Grid.Column="2"
-                MinWidth="130"
-                Background="{StaticResource LightBrush}" 
                 Margin="0,10,0,5">
             <Button x:Name="buttonDetails" 
                     HorizontalAlignment="Right"
@@ -80,8 +64,14 @@
                     FontWeight="Medium"
                     Foreground="{StaticResource DarkBrush}"
                     Click="buttonDetails_Click">
-                > Show Details
+                + Details:
             </Button>
-        </Border>        
+        </Border>
+
+        <Border Grid.Row="2" 
+                Grid.Column="1"
+                Background="{StaticResource LightBrush}" 
+                Margin="0,10,0,5">
+        </Border>       
     </Grid>
 </UserControl>

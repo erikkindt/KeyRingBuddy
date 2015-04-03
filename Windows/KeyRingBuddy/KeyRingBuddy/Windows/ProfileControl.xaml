@@ -68,8 +68,7 @@
             </Grid.RowDefinitions>
             
             <Border Grid.Row="0"              
-                    CornerRadius="10,10,0,0"
-                    Background="{StaticResource HotBrush}">
+                    Background="{StaticResource LightBrush}">
 
                 <StackPanel Orientation="Horizontal"
                             Margin="10,6,0,6">
@@ -87,7 +86,7 @@
                                Text="Account"
                                FontSize="22"
                                FontWeight="Medium"
-                               Foreground="{StaticResource LightPlusBrush}"
+                               Foreground="{StaticResource DarkBrush}"
                                Padding="10,5,5,5"/>
                 </StackPanel>
             </Border>

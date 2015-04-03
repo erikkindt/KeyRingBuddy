@@ -43,7 +43,6 @@
                     </ControlTemplate.Triggers>
 
                     <Border x:Name="border"
-                            CornerRadius="2"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             Effect="{TemplateBinding Effect}"

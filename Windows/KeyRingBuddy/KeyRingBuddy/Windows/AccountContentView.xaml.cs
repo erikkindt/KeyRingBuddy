@@ -58,13 +58,13 @@ namespace KeyRingBuddy.Windows
         /// </summary>
         public bool IsDetailsVisible
         {
-            get { return (buttonDetails.Content as string) == "< Hide Details"; }
+            get { return (buttonDetails.Content as string) == "- Details:"; }
             set
             {
                 if (IsDetailsVisible == value)
                     return;
 
-                buttonDetails.Content = value ? "< Hide Details" : "> Show Details";
+                buttonDetails.Content = value ? "- Details:" : "+ Details:";
 
                 int startRow = 3;
                 foreach (UIElement element in gridMain.Children)
@@ -117,7 +117,6 @@ namespace KeyRingBuddy.Windows
             textBlockValue.Visibility = IsDetailsVisible ? Visibility.Visible : Visibility.Collapsed;
             Grid.SetRow(textBlockValue, row);
             Grid.SetColumn(textBlockValue, 1);
-            Grid.SetColumnSpan(textBlockValue, 2);
             gridMain.Children.Add(textBlockValue);
         }
 
