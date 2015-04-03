@@ -91,30 +91,43 @@ namespace KeyRingBuddy.Framework
 
             using (WebClient webClient = new WebClient())
             {               
+                // set the headers
+                webClient.Headers.Add(HttpRequestHeader.UserAgent, "Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36");
+
                 // get icon specified in file
                 try
                 {
                     string html = webClient.DownloadString(url);
-                    Match match = Regex.Match(
-                        html, 
-                        "<\\s*link.*?rel\\s*=\\s*\"(shortcut )?icon\".*?(/>|<\\s*/\\s*link\\s*>)", 
+                    MatchCollection matches = Regex.Matches(
+                        html,
+                        "<link\\b[^>]*", 
                         RegexOptions.IgnoreCase);
 
-                    if (match != null)
+                    foreach (Match match in matches)
                     {
-                        Match hrefMatch = Regex.Match(
-                            match.Value,
-                            "href\\s*=\".*?\"",
-                            RegexOptions.IgnoreCase);
-
-                        if (hrefMatch != null)
+                        if (Regex.IsMatch(match.Value, "rel=\\\"(shortcut )?icon\\\"", RegexOptions.IgnoreCase))
                         {
-                            int index = hrefMatch.Value.IndexOf('"');
-                            string href = hrefMatch.Value.Substring(index + 1, hrefMatch.Value.Length - index - 2);
+                            Match hrefMatch = Regex.Match(
+                                match.Value,
+                                "href=\\\".*?\\\"",
+                                RegexOptions.IgnoreCase);
 
-                            webClient.BaseAddress = root;
-                            icon = webClient.DownloadData(href);
-                            iconType = System.IO.Path.GetExtension(href).ToLower();
+                            if (hrefMatch != null)
+                            {
+                                int index = hrefMatch.Value.IndexOf('"');
+                                string href = hrefMatch.Value.Substring(index + 1, hrefMatch.Value.Length - index - 2);
+
+                                webClient.BaseAddress = root;
+                                icon = webClient.DownloadData(href);
+                                iconType = System.IO.Path.GetExtension(href).ToLower();
+
+                                int indexQuestionMark = iconType.IndexOf('?');
+                                if (indexQuestionMark != -1)
+                                    iconType = iconType.Substring(0, indexQuestionMark);
+                            }
+
+                            if (Regex.IsMatch(match.Value, "rel=\\\"shortcut icon\\\"", RegexOptions.IgnoreCase))
+                                break;
                         }
                     }
                 }
@@ -143,47 +156,53 @@ namespace KeyRingBuddy.Framework
 
             if (icon != null)
             {
-                // convert icon to bitmaps
-                using (System.IO.MemoryStream stream = new System.IO.MemoryStream(icon))
+                try
                 {
-                    BitmapDecoder decoder = null;
-                    switch (iconType)
+                    // convert icon to bitmaps
+                    using (System.IO.MemoryStream stream = new System.IO.MemoryStream(icon))
                     {
-                        case ".ico":
-                            decoder = new IconBitmapDecoder(
-                                stream,
-                                BitmapCreateOptions.PreservePixelFormat,
-                                BitmapCacheOption.OnLoad);
-                            break;
-
-                        case ".gif":
-                            decoder = new GifBitmapDecoder(
-                                stream,
-                                BitmapCreateOptions.PreservePixelFormat,
-                                BitmapCacheOption.OnLoad);
-                            break;
-
-                        case ".png":
-                            decoder = new PngBitmapDecoder(
-                                stream,
-                                BitmapCreateOptions.PreservePixelFormat,
-                                BitmapCacheOption.OnLoad);
-                            break;
-
-                        default:
-                            break;
-                    }
-
-                    if (decoder != null)
-                    {
-                        foreach (BitmapFrame frame in decoder.Frames)
+                        BitmapDecoder decoder = null;
+                        switch (iconType)
                         {
-                            if (frame.Height == 16 && frame.Width == 16)
-                                result.SmallIcon = frame;
-                            else if (frame.Height == 32 && frame.Width == 32)
-                                result.LargeIcon = frame;
+                            case ".ico":
+                                decoder = new IconBitmapDecoder(
+                                    stream,
+                                    BitmapCreateOptions.PreservePixelFormat,
+                                    BitmapCacheOption.OnLoad);
+                                break;
+
+                            case ".gif":
+                                decoder = new GifBitmapDecoder(
+                                    stream,
+                                    BitmapCreateOptions.PreservePixelFormat,
+                                    BitmapCacheOption.OnLoad);
+                                break;
+
+                            case ".png":
+                                decoder = new PngBitmapDecoder(
+                                    stream,
+                                    BitmapCreateOptions.PreservePixelFormat,
+                                    BitmapCacheOption.OnLoad);
+                                break;
+
+                            default:
+                                break;
+                        }
+
+                        if (decoder != null)
+                        {
+                            foreach (BitmapFrame frame in decoder.Frames)
+                            {
+                                if (frame.Height == 16 && frame.Width == 16)
+                                    result.SmallIcon = frame;
+                                else if (frame.Height == 32 && frame.Width == 32)
+                                    result.LargeIcon = frame;
+                            }
                         }
                     }
+                }
+                catch
+                {
                 }
             }
 
@@ -291,7 +310,7 @@ namespace KeyRingBuddy.Framework
             {
                 using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                 {
-                    BitmapEncoder encoder = new BmpBitmapEncoder();
+                    BitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(smallFrame);
                     encoder.Save(ms);
 
@@ -308,7 +327,7 @@ namespace KeyRingBuddy.Framework
             {
                 using (System.IO.MemoryStream ms = new System.IO.MemoryStream())
                 {
-                    BitmapEncoder encoder = new BmpBitmapEncoder();
+                    BitmapEncoder encoder = new PngBitmapEncoder();
                     encoder.Frames.Add(largeFrame);
                     encoder.Save(ms);
 
