@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Wix xmlns='http://schemas.microsoft.com/wix/2006/wi'>
+
+  <Product Id="AFBE0844-4695-433C-9672-7B67DD9E3621"
+           UpgradeCode="F196430A-ED23-4DEA-9898-15E5BDF699DC"
+           Version="0.1.0.0"
+           Language="1033"
+           Name="KeyRingBuddy"
+           Manufacturer="natewallace@gmail.com">
+
+    <Package InstallerVersion="300" Compressed="yes" />
+    <Media Id="1" Cabinet="KeyRingBuddy.cab" EmbedCab="yes" />
+
+    <Icon Id="AppIcon.ico" SourceFile="..\KeyRingBuddy\AppIcon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.ico" />
+
+    <MajorUpgrade DowngradeErrorMessage="A later version of [ProductName] is already installed. Setup will now exit." />
+
+    <!-- Define the directory structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONFOLDER" Name="KeyRingBuddy">
+        </Directory>
+      </Directory>
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationMenuFolder" Name="KeyRingBuddy" />
+      </Directory>
+      <Directory Id="DesktopFolder" />
+    </Directory>
+
+    <!-- Add files to installer package -->
+    <DirectoryRef Id="APPLICATIONFOLDER">
+      <Component Id="KeyRingBuddy.exe" Guid="6EC6B274-5060-4DA1-AA4D-089AFC044365">
+        <File Id="KeyRingBuddy.exe" Source="..\KeyRingBuddy\bin\Release\KeyRingBuddy.exe" KeyPath="yes" Checksum="yes" />
+        <RemoveFolder Id="ProgramMenuAppFolder" On="uninstall" />
+      </Component>
+      <Component Id="KeyRingBuddy.pdb" Guid="423FC9D5-781F-4158-A9F1-ACD6C8334EE5">
+        <File Id="KeyRingBuddy.pdb" Source="..\KeyRingBuddy\bin\Release\KeyRingBuddy.pdb" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="KeyRingBuddy.exe.config" Guid="1F655260-9C18-4770-9241-D6443B6E8D5C">
+        <File Id="KeyRingBuddy.exe.config" Source="..\KeyRingBuddy\bin\Release\KeyRingBuddy.exe.config" KeyPath="yes" Checksum="yes"/>
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="ApplicationMenuFolder">
+      <Component Id="KeyRingBuddy.exe.menuShortcut" Guid="86762A97-D1E2-409D-86DE-0DFBCAE67EAD">
+        <Shortcut Id="KeyRingBuddy.exe.menuShortcut"
+                  Name="KeyRingBuddy.exe"
+                  Target="[#KeyRingBuddy.exe]"
+                  WorkingDirectory="ApplicationMenuFolder"
+                  Icon="AppIcon.ico"/>
+        <RemoveFolder Id="ApplicationMenuFolder" On="uninstall" />
+        <RegistryValue Root="HKCU" Key="Software\KeyRingBuddy" Name="menuShortcut" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <DirectoryRef Id="DesktopFolder">
+      <Component Id="KeyRingBuddy.exe.desktopShortcut" Guid="88660EAD-EDE3-44B9-B1BE-9C03C53743C5">
+        <Shortcut Id="KeyRingBuddy.exe.desktopShortcut"
+                  Name="KeyRingBuddy.exe"
+                  Target="[#KeyRingBuddy.exe]"
+                  WorkingDirectory="ApplicationMenuFolder"
+                  Icon="AppIcon.ico"/>
+        <RegistryValue Root="HKCU" Key="Software\KeyRingBuddy" Name="desktopShortcut" Type="integer" Value="1" KeyPath="yes" />
+      </Component>
+    </DirectoryRef>
+
+    <!-- Tell WiX to install the files -->
+    <Feature Id="KeyRingBuddyFiles" Title="KeyRingBuddy" Level="1">
+      <ComponentRef Id="KeyRingBuddy.exe" />
+      <ComponentRef Id="KeyRingBuddy.exe.menuShortcut" />
+      <ComponentRef Id="KeyRingBuddy.exe.desktopShortcut" />
+      <ComponentRef Id="KeyRingBuddy.exe.config" />
+      <ComponentRef Id="KeyRingBuddy.pdb" />
+    </Feature>
+
+    <!-- UI configuration -->
+    <UI>
+      <UIRef Id="WixUI_Advanced" />
+      <Publish Dialog="ExitDialog"
+               Control="Finish"
+               Event="DoAction"
+               Value="LaunchApplication">NOT Installed</Publish>
+    </UI>
+
+    <Property Id="ApplicationFolderName" Value="KeyRingBuddy" />
+    <Property Id="WixAppFolder" Value="WixPerUserFolder" />
+
+    <WixVariable Id="WixUIBannerBmp" Value="Banner.bmp" />
+    <WixVariable Id="WixUIDialogBmp" Value="Dialog.bmp" />
+
+    <!-- Custom action to start the app -->
+    <CustomAction Id="LaunchApplication"
+                  FileKey="KeyRingBuddy.exe"
+                  ExeCommand="-first"
+                  Return="asyncNoWait"
+                  Impersonate="yes" />
+
+  </Product>
+
+</Wix>
